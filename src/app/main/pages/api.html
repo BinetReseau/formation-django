@@ -1,0 +1,92 @@
+<div class="col-md-12">
+    <h1 id="rest-framework">3. Mise en place d'une API</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">a. Django REST Framework</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Ensemble d'outils pour échanger des données avec un client</li>
+                <li>Dans <code>formation/formation/settings.py</code>, rajouter <code>'rest_framework',</code> à <var>INSTALLED_APPS</var></li>
+                <li>Mise en place des routes dans <code>formation/formation/urls.py</code> :
+<pre hljs>
+from rest_framework import routers
+router = routers.DefaultRouter()
+urlpatterns = [ 
+    ... 
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')) ,
+]
+</pre>
+                </li>
+                <li>Relancer le serveur de développement et voir le résultat à <a href="http://127.0.0.1:8000" target="_blank">127.0.0.1:8000</a></li>
+                <li>Documentation : <a href="http://django-rest-framework.org" target="_blank">http://django-rest-framework.org</a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="serializer">
+        <div class="panel-heading">
+            <h3 class="panel-title">b. Serializer</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Classe qui transforme le JSON en objet python et réciproquement</li>
+                <li>Un serializer met à disposition des méthodes pour créer, modifier et valider des instances de modèles Django.</li>
+<pre hljs>
+from rest_framework import serializers
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="viewset">
+        <div class="panel-heading">
+            <h3 class="panel-title">c. Viewset</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Une vue est un &laquo;&nbsp;type&nbsp;&raquo; de page web, qui s'occupe d'une fonction précise.</li>
+                <li>Concrètement, c'est une fonction qui est appelée par Django en fonction de l'URL de la requête.</li>
+                <li>Le REST framework propose un raccourci qui gère tout : le <em>viewset</em>.
+<pre hljs>
+from rest_framework import viewsets
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+</pre>
+                </li>
+                <li>Il faut rajouter ce viewset dans <code>urls.py</code> :
+<pre hljs>
+from notes.models import StudentViewSet
+
+router.register(r'students', StudentViewSet)
+</pre>
+                </li>
+                <li>Relancer le serveur de développement et voir le résultat à <a href="http://127.0.0.1:8000" target="_blank">127.0.0.1:8000</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="exercice">
+        <div class="panel-heading">
+            <h3 class="panel-title">d. Exercice</h3>
+        </div>
+        <div class="panel-body">
+            Objectif :
+            <ul>
+                <li>Pouvoir effectuer les opérations de récupération, création, modification et suppression du modèle <var>Course</var> depuis l'API web.</li>
+            </ul>
+            Bonus :
+            <ul>
+                <li>Lors de la récupération d'une instance de <var>Student</var>, on veut avoir directement l'âge de l'étudiant. Modifier le modèle <code>Student</code> et le serializer <code>StudentSerializer</code> pour obtenir ce résultat.</li>
+        </div>
+    </div>
+</div>

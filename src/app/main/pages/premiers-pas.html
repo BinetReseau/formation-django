@@ -1,0 +1,115 @@
+<div class="col-md-12">
+    <h1 id="install">2. Premiers pas avec Django</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">a. Installation</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Créer un dossier pour le projet et y installer un environnement de développement :<br />
+<pre hljs language="bash">
+mkdir formation
+cd formation
+virtualenv --python=python3 env
+source env/bin/activate
+</pre>
+                </li>
+                <li>Gestionnaire de dépendances Python : pip</li>
+                <li>Fichier de dépendances <code>requirements.txt</code> :
+<pre>django==1.8.3
+djangorestframework==3.1.3
+django-debug-toolbar==1.3.2</pre>
+                </li>
+                <li>Installation des dépendances : <code>pip install -r requirements.txt</code></li>
+                <li>Test de bon fonctionnement : <code>python</code>
+<pre hljs language="python">
+import django
+django.__version__
+</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="structure">
+        <div class="panel-heading">
+            <h3 class="panel-title">b. Structure d'un projet</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Créer un projet Django dans le dossier courant : <code>django-admin startproject &lt;project_name&gt; .</code> (attention au point final !)</li>
+                <li>Un projet contient plusieurs applications. Une application correspond à une grosse fonctionnalité.</li>
+                <li>Créer une application : <code>python manage.py startapp &lt;app_name&gt;</code></li>
+                <li>Structure de notre projet Django :
+<pre>/formation
+    /formation
+        settings.py
+        urls.py
+        wsgi.py
+    /notes
+        admin.py
+        migrations/
+        models.py
+        tests.py
+        views.py
+    manage.py
+    requirements.txt</pre>
+                </li>
+                <li>Il faut ensuite ajouter l'application au projet dans le fichier <code>/formation/formation/settings.py</code> : <br />
+                <code>INSTALLED_APPS = [ ..., 'notes', ]</code></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="modele">
+        <div class="panel-heading">
+            <h3 class="panel-title">c. Premier modèle</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Un modèle est la source d’information unique et structurée pour les données du site.</li>
+                <li>On définit les modèles par des classes Python dans le fichier <code>models.py</code> de l'application.</li>
+                <li>Pour définir un modèle Django, il faut importer le module <code>django.db.models</code> fourni par Django avec : <br />
+                <code>from django.db import models</code></li>
+                <li>Dans le modèle, on définit tous les champs de l'objet avec leur type.</li>
+            </ul>
+            Exemple : le modèle <code>Student</code> pour notre application de gestion de notes.
+<pre hljs>
+from django.db import models
+
+class Student(models.Model):
+    lastname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100)
+    birthdate = models.DateField()
+    promotion = models.IntegerField()
+
+    def __str__(self):
+        return "{0} {1} (X{2})".format(self.lastname, self.firstname, self.promotion)
+</pre>
+            <ul>
+                <li>Il faut ensuite enregistrer ces modifications dans la structure de base de données :<br />
+                <code>python manage.py makemigrations</code><br />
+                <code>python manage.py migrate</code>
+                </li>
+                <li>On peut jouer avec les modèles dans le shell interactif de django : <code>python manage.py shell</code>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="exercice1">
+        <div class="panel-heading">
+            <h3 class="panel-title">d. Exercice</h3>
+        </div>
+        <div class="panel-body">
+            Objectifs : 
+            <ul>
+                <li>créer un modèle Course qui représente un cours</li>
+                <li>il contiendra (au moins) les informations suivantes : code, nom, coefficient</li>
+                <li>ajouter quelques cours dans la base de données</li>
+            </ul>
+            Lien utile : <a href="https://docs.djangoproject.com/fr/1.8/ref/models/" title="Doc Django" target="_blank">https://docs.djangoproject.com/fr/1.8/ref/models/</a><br />
+            Pour les plus rapides : un code de cours est censé être unique...
+        </div>
+    </div>
+</div>

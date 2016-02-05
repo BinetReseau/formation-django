@@ -1,0 +1,96 @@
+<div class="col-md-12">
+    <h1 id="checklist">1. Mise en route</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">a. Checklist</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Python 3.4 est installé</li>
+                <li>virtualenv est installé</li>
+                <li>Connexion Internet fonctionnelle (Wifi ou câble Ethernet)</li>
+                <li>Éditeur de texte (Sublime Text 3)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="cestquoi">
+        <div class="panel-heading">
+            <h3 class="panel-title">b. Django, cékoiça ?</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Framework web écrit dans le langage Python</li>
+                <li>Permet un développement rapide d'une application web</li>
+                <li>Repose sur l'architecture de développement : Modèle-Vue(-Contrôleur) ou MV(C)</li>
+            </ul>
+            <div class="text-center">
+                <img src="assets/images/archi-mvt.png" style="max-width: 100%;" /><br />
+                <small><em>Source : openclassrooms.com</em></small>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="http">
+        <div class="panel-heading">
+            <h3 class="panel-title">c. Le protocole HTTP : requête et réponse</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>
+                    Requête :<br />
+<pre>Requête à 78.40.123.120 :
+GET http://api.deezer.com/user/2529 HTTP/1.1</pre>
+                </li>
+                <li>
+                    Réponse : <code>HTTP/1.1 200 OK</code><br />
+<pre hljs language="json">{  
+    "id":2529,
+    "name":"dadbond",
+    "link":"http:\/\/www.deezer.com\/profile\/2529",
+    "picture":"http:\/\/api.deezer.com\/user\/2529\/image",
+    "picture_small":"http:\/\/cdn-images.deezer.com\/images\/user\/f7d65630f2746f28a2ae01ed49f38aa7\/56x56-000000-80-0-0.jpg",
+    "picture_medium":"http:\/\/cdn-images.deezer.com\/images\/user\/f7d65630f2746f28a2ae01ed49f38aa7\/250x250-000000-80-0-0.jpg",
+    "picture_big":"http:\/\/cdn-images.deezer.com\/images\/user\/f7d65630f2746f28a2ae01ed49f38aa7\/500x500-000000-80-0-0.jpg",
+    "country":"FR",
+    "tracklist":"http:\/\/api.deezer.com\/user\/2529\/flow",
+    "type":"user"
+}
+</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="client-serveur">
+        <div class="panel-heading">
+            <h3 class="panel-title">d. Client &amp; serveur</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Deux parties découplées d'un même projet</li>
+                <li>Permet d'être modulaire</li>
+                <li>Ex : application Deezer pour iPhone :
+                    <ul>
+                        <li>l'application sur le téléphone est le <em>client</em></li>
+                        <li>elle effectue des <em>requêtes</em> à un <em>serveur</em> de Deezer</li>
+                        <li>le serveur <em>répond</em> et envoie les données au client</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="text-center">
+                <img src="assets/images/client-server-http.svg" style="max-width: 100%;" />
+            </div>
+            <ul>
+                <li>Ex : Chocapix :
+                    <ul>
+                        <li>En tapant <sample>http://chocapix/</sample> dans la barre d'adresse, on récupère des fichiers HTML et JavaScript qui sont <em>exécutés</em> par le navigateur : <br />
+                        c'est le <em>client</em>, qui est une application exécutée dans le navigateur.</li>
+                        <li>Ce client est capable d'effectuer des requêtes au serveur de Chocapix.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
